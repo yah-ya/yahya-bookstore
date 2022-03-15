@@ -1,0 +1,17 @@
+{
+    "name": "yahya/bookstore",
+    "description": "Tiny Book Store App",
+    "autoload": {
+        "psr-4": {
+            "Yahyya\\bookstore\\": "src/",
+            "Yahyya\\bookstore\\Tests\\": "tests"
+        }
+    },
+    "authors": [
+        {
+            "name": "Yahya",
+            "email": "y.t.15132@gmail.com"
+        }
+    ],
+    "require": {}
+}
