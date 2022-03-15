@@ -101,7 +101,16 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        $book = Book::findOrFail($id);
-        return response()->json(['res'=>$this->repo->delete($book)]);
+        return response()->json(['res'=>$this->repo->deleteById($id)]);
+    }
+
+    public function setAuthor($authorId,Book $book)
+    {
+        return response()->json(['res'=>$this->repo->assignNewAuthor($authorId,$book)]);
+    }
+
+    public function removeAuthor($authorId,Book $book)
+    {
+        return response()->json(['res'=>$this->repo->removeAuthor($authorId,$book)]);
     }
 }

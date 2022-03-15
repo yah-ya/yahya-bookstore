@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
-use Yahyya\bookstore\Database\Seeds\AuthorSeeder;
+use Yahyya\bookstore\App\Http\Middleware\CheckAuthToken;
 
 class ApiTest extends TestCase
 {
@@ -17,5 +17,6 @@ class ApiTest extends TestCase
         $this->withoutMiddleware([CheckAuthToken::class]);
 
     }
-    
+
+
 }

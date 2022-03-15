@@ -108,4 +108,34 @@ class BookTest extends TestCase
         $this->assertEquals($this->bookController->show( $book->id)->getStatusCode(),200);
     }
 
+    public function test_user_can_add_an_author_to_a_book()
+    {
+        $book = factory(Book::class)->create();
+        $author = factory(Author::class)->create();
+        $author2 = factory(Author::class)->create();
+
+        $this->bookController->setAuthor($author->id,$book);
+        $this->bookController->setAuthor($author2->id,$book);
+        $book = Book::find($book->id);
+
+        $this->assertEquals($book->authors->count(),2);
+    }
+
+    public function test_user_can_remove_an_author_from_a_book()
+    {
+        $book = factory(Book::class)->create();
+        $author = factory(Author::class)->create();
+        $author2 = factory(Author::class)->create();
+
+        $this->bookController->setAuthor($author->id,$book);
+        $this->bookController->setAuthor($author2->id,$book);
+        $book = Book::find($book->id);
+        $this->assertEquals($book->authors->count(),2);
+
+        $this->bookController->removeAuthor($author->id,$book);
+        $book = Book::find($book->id);
+        $this->assertEquals($book->authors->count(),1);
+    }
+
+
 }

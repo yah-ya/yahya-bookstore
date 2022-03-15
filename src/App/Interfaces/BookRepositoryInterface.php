@@ -11,5 +11,7 @@ interface BookRepositoryInterface
     public function update(Book $book,array $details):bool;
     public function list():Collection;
     public function getById(int $bookId):Book;
-    public function delete(Book $book):bool;
+    public function deleteById(int $bookId):bool;
+    public function assignNewAuthor(int $authorId,Book $book):bool;
+    public function removeAuthor(int $authorId,Book $book):bool;
 }

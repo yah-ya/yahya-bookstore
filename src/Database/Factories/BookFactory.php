@@ -24,6 +24,5 @@ $factory->define(Book::class, function (Faker $faker) {
         'short_desc' => $faker->shuffleString,
         'amount' => $faker->randomDigitNotZero(),
         'stock' => $faker->randomNumber(),
-        'author_id'=> \factory(\Yahyya\bookstore\App\Models\Author::class)->create()->first()->id,
     ];
 });
