@@ -18,7 +18,8 @@ class Author extends JsonResource
         return [
             'id'=>$this->id,
             'firstName'=>$this->first_name,
-            'lastName'=>$this->first_name,
+            'lastName'=>$this->last_name,
+            'bookStock'=>$this->books()->sum('stock')
         ];
     }
 }

@@ -14,11 +14,9 @@ use Yahyya\bookstore\App\Http\Resources\BookCollection;
 class BookController extends Controller
 {
     private BookRepositoryInterface $repo;
-    private ReserveRepositoryInterface $reserveRepo;
-    public function __construct(BookRepositoryInterface $bookRepository,ReserveRepositoryInterface $reserveRepo)
+    public function __construct(BookRepositoryInterface $bookRepository)
     {
         $this->repo = $bookRepository;
-        $this->reserveRepo = $reserveRepo;
     }
 
     /**
@@ -118,20 +116,6 @@ class BookController extends Controller
         return response()->json(['res'=>$this->repo->removeAuthor($authorId,$book)]);
     }
 
-    public function reserve(int $bookId,$request)
-    {
-        $book = $this->repo->getById($bookId);
-        $totalReserved = $this->reserveRepo->getTotalReservedByBookId($bookId);
 
 
-        if($totalReserved + $request->quantity > $book->stock )
-        {
-            return response()->json(['res'=>false,'msg'=>'This book is not in stock'],402);
-        }
-
-        $quantity = empty($request->quantity) ? 1 : $request->quantity;
-
-        $reserve = $this->reserveRepo->store(Auth::user()->id,$book,$quantity);
-        return response()->json(['res'=>true,'data'=>$reserve]);
-    }
 }
