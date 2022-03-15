@@ -1,5 +1,5 @@
 <?php
-namespace Yahyya\taskmanager\Database\Seeds;
+namespace Yahyya\bookstore\Database\Seeds;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -12,7 +12,7 @@ class UserSeeder extends Seeder
     public function run()
     {
 
-        factory(\Yahyya\taskmanager\App\Models\Author::class,100)->create()->each(function($user){
+        factory(\Yahyya\bookstore\App\Models\User::class,100)->create()->each(function($user){
 
         });
     }

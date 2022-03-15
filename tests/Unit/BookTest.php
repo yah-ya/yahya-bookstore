@@ -15,6 +15,7 @@ use Yahyya\bookstore\App\Models\Book;
 use Yahyya\bookstore\App\Models\User;
 use Yahyya\bookstore\App\Repositories\BookRepository;
 use Yahyya\bookstore\App\Http\Requests\UpdateBook;
+use Yahyya\bookstore\Database\Seeds\DatabaseSeeder;
 
 
 class BookTest extends TestCase
@@ -31,6 +32,7 @@ class BookTest extends TestCase
         $this->request = new Request();
         $this->user = $this->checkUserAuthorization();
         $this->bookController = new BookController(new BookRepository());
+
     }
 
     private function authorizeToken(string $token)
@@ -135,6 +137,14 @@ class BookTest extends TestCase
         $this->bookController->removeAuthor($author->id,$book);
         $book = Book::find($book->id);
         $this->assertEquals($book->authors->count(),1);
+    }
+
+
+    public function test_user_can_get_list_of_books_with_authors()
+    {
+        $this->seed(DatabaseSeeder::class);
+        $this->assertEquals(100,$this->bookController->index()->count());
+        $this->assertNotEmpty($this->bookController->index()[0]->authors);
     }
 
 

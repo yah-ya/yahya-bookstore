@@ -1,6 +1,8 @@
 <?php
-namespace Yahyya\taskmanager\Database\Seeds;
+namespace Yahyya\bookstore\Database\Seeds;
 use Illuminate\Database\Seeder;
+use Yahyya\bookstore\App\Models\Author;
+use Yahyya\bookstore\App\Models\Book;
 
 class BookSeeder extends Seeder
 {
@@ -11,9 +13,8 @@ class BookSeeder extends Seeder
      */
     public function run()
     {
-        factory(\Yahyya\taskmanager\App\Models\Task::class,100)->create()->each(function($task){
-            $task->user_id = \Yahyya\taskmanager\App\Models\Author::query()->inRandomOrder()->first()->id;
-            $task->labels()->save(\Yahyya\taskmanager\App\Models\Book::query()->inRandomOrder()->first());
+        factory(Book::class,100)->create()->each(function($book){
+            $book->authors()->save(Author::query()->inRandomOrder()->first());
         });
     }
 }

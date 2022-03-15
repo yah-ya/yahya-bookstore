@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Yahyya\bookstore\App\Http\Requests\StoreBook;
 use Yahyya\bookstore\App\Interfaces\BookRepositoryInterface;
 use Yahyya\bookstore\App\Models\Book;
-use Yahyya\taskmanager\App\Http\Resources\BookCollection;
+use Yahyya\bookstore\App\Http\Resources\BookCollection;
 
 class BookController extends Controller
 {

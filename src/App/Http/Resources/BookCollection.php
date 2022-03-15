@@ -1,6 +1,6 @@
 <?php
 
-namespace Yahyya\taskmanager\App\Http\Resources;
+namespace Yahyya\bookstore\App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 

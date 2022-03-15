@@ -21,7 +21,8 @@ class BookRepository implements BookRepositoryInterface
 
     public function list():Collection
     {
-        return Book::all();
+
+        return Book::with('authors')->get();
     }
 
     public function update(Book $book,array $details): bool

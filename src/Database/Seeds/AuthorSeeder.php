@@ -1,5 +1,5 @@
 <?php
-namespace Yahyya\taskmanager\Database\Seeds;
+namespace Yahyya\bookstore\Database\Seeds;
 use Illuminate\Database\Seeder;
 
 class AuthorSeeder extends Seeder
@@ -11,7 +11,7 @@ class AuthorSeeder extends Seeder
      */
     public function run()
     {
-        factory(\Yahyya\taskmanager\App\Models\Book::class,100)->create()->each(function($label){
+        factory(\Yahyya\bookstore\App\Models\Author::class,100)->create()->each(function($author){
         });
     }
 }
