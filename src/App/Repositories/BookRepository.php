@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 use Yahyya\bookstore\App\Interfaces\BookRepositoryInterface;
 use Yahyya\bookstore\App\Models\Book;
 use Yahyya\bookstore\App\Models\BookAuthors;
+use Yahyya\bookstore\App\Models\Reserve;
 
 class BookRepository implements BookRepositoryInterface
 {
@@ -64,4 +65,5 @@ class BookRepository implements BookRepositoryInterface
         $bookAuthors->delete();
         return true;
     }
+
 }

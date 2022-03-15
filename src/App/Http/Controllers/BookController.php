@@ -4,17 +4,21 @@ namespace Yahyya\bookstore\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yahyya\bookstore\App\Http\Requests\StoreBook;
 use Yahyya\bookstore\App\Interfaces\BookRepositoryInterface;
+use Yahyya\bookstore\App\Interfaces\ReserveRepositoryInterface;
 use Yahyya\bookstore\App\Models\Book;
 use Yahyya\bookstore\App\Http\Resources\BookCollection;
 
 class BookController extends Controller
 {
     private BookRepositoryInterface $repo;
-    public function __construct(BookRepositoryInterface $bookRepository)
+    private ReserveRepositoryInterface $reserveRepo;
+    public function __construct(BookRepositoryInterface $bookRepository,ReserveRepositoryInterface $reserveRepo)
     {
         $this->repo = $bookRepository;
+        $this->reserveRepo = $reserveRepo;
     }
 
     /**
@@ -112,5 +116,22 @@ class BookController extends Controller
     public function removeAuthor($authorId,Book $book)
     {
         return response()->json(['res'=>$this->repo->removeAuthor($authorId,$book)]);
+    }
+
+    public function reserve(int $bookId,$request)
+    {
+        $book = $this->repo->getById($bookId);
+        $totalReserved = $this->reserveRepo->getTotalReservedByBookId($bookId);
+
+
+        if($totalReserved + $request->quantity > $book->stock )
+        {
+            return response()->json(['res'=>false,'msg'=>'This book is not in stock'],402);
+        }
+
+        $quantity = empty($request->quantity) ? 1 : $request->quantity;
+
+        $reserve = $this->reserveRepo->store(Auth::user()->id,$book,$quantity);
+        return response()->json(['res'=>true,'data'=>$reserve]);
     }
 }

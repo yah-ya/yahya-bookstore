@@ -23,6 +23,6 @@ $factory->define(Book::class, function (Faker $faker) {
         'title' => $faker->name,
         'short_desc' => $faker->shuffleString,
         'amount' => $faker->randomDigitNotZero(),
-        'stock' => $faker->randomNumber(),
+        'stock' => rand(0,10),
     ];
 });
